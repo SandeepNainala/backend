@@ -4,7 +4,7 @@ pipeline{
     }
     options {
         timeout(time: 30, unit: 'MINUTES')
-        disableConcurrentBulids()
+        disableConcurrentBuilds()
         ansiColor('xterm')
     }
     environment{
@@ -21,11 +21,13 @@ pipeline{
             }
         }
         stage('Install Dependencies'){
-            sh """
-            npm install
-            ls -ltr
-            echo "application version: $appVersion"
-            """
+            steps {
+                sh """
+                npm install
+                ls -ltr
+                echo "application version: $appVersion"
+                """
+            }
         }
         stage('Build'){
             steps{

@@ -7,6 +7,9 @@ pipeline {
         disableConcurrentBuilds()
         ansiColor('xterm')
     }
+    parameters{
+        booleanParam(name: 'deploy', defaultValue: false, description: 'Toggle this value')
+    }
     environment{
         def appVersion = ''
         nexusUrl = 'nexus.devops91.cloud:8081'
@@ -50,6 +53,13 @@ pipeline {
                 }
             }
         }
+        stage("Quality Gate") {
+            steps {
+                timeout(time: 1, unit: 'HOURS') {
+                waitForQualityGate abortPipeline: true
+                }
+            }
+        }
         stage('Nexus artifact upload'){
             steps{
                 script{
@@ -72,6 +82,11 @@ pipeline {
             }
         }
         stage('Deploy'){
+            when{
+                expression{
+                    params.deploy
+                }
+            }
             steps{
                 script{
                     def params = [

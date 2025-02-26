@@ -11,7 +11,7 @@ pipeline {
         booleanParam(name: 'deploy', defaultValue: false, description: 'Toggle this value')
     }
     environment{
-        def appVersion = ''
+        def appVersion = ''           # Variable to store the version of the application
         nexusUrl = 'nexus.devops91.cloud:8081'
     }
     stages {

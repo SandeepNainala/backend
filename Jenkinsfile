@@ -10,7 +10,7 @@ pipeline {
     parameters{
         booleanParam(name: 'deploy', defaultValue: false, description: 'Toggle this value')
     }
-    # environment{
+    environment{
         def appVersion = ''   //defining the variable
         nexusUrl = 'nexus.devops91.cloud:8081'
     }

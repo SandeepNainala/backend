@@ -12,7 +12,7 @@ pipeline {
     }
     environment{
         def appVersion = ''   //defining the variable
-        nexusUrl = 'nexus.devops91.cloud:8081'
+         nexusUrl = 'nexus.devops91.cloud:8081'
     }
     stages {
         stage('read the version') {
